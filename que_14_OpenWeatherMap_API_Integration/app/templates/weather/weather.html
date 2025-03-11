@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+    <div class="max-w-4xl mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-6">Check Current Weather</h1>
+        <form method="POST" class="bg-white p-4 rounded-lg shadow-lg">
+            {% csrf_token %}
+            <div class="mb-4">
+                <input type="text" name="city" placeholder="Enter city name" required class="w-full p-3 border border-gray-300 rounded-md">
+            </div>
+            <div class="mb-4 text-center">
+                <button type="submit" class="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Get Weather</button>
+            </div>
+        </form>
+
+        {% if weather_data %}
+            <div class="mt-6 bg-white p-4 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Weather in {{ weather_data.name }}</h2>
+                <p class="text-lg mb-2">Temperature: {{ weather_data.main.temp }}°C</p>
+                <p class="text-lg mb-2">Humidity: {{ weather_data.main.humidity }}%</p>
+                <p class="text-lg mb-2">Description: {{ weather_data.weather.0.description }}</p>
+                <img src="http://openweathermap.org/img/wn/{{ weather_data.weather.0.icon }}@2x.png" alt="Weather Icon" class="mx-auto">
+            </div>
+        {% elif error_message %}
+            <div class="mt-6 p-4 bg-red-100 text-red-700 rounded-lg">
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+v

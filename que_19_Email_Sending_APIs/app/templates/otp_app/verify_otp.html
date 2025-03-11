@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full bg-gray-800 p-6 rounded-lg shadow-2xl border border-blue-500">
+        <h2 class="text-2xl font-bold text-blue-400 text-center">🔐 Verify OTP</h2>
+        <form method="POST" class="mt-4 flex flex-col gap-4">
+            {% csrf_token %}
+            <label class="text-lg">Enter OTP:</label>
+            <input type="text" name="otp" class="p-3 glow-border bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 transition p-3 rounded-lg text-white font-bold shadow-lg transform hover:scale-105">✅ Verify</button>
+        </form>
+    </div>
+</body>
+</html>

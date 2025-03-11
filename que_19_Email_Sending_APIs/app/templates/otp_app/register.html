@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+        }
+        input, select {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            color: white;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full glass-effect p-8 rounded-xl shadow-2xl border border-green-400">
+        <h2 class="text-3xl font-extrabold text-green-300 text-center mb-6">📝 User Registration</h2>
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            
+            <!-- Form Fields with Better Spacing -->
+            <div class="space-y-2">
+                {{ form.as_p }}
+            </div>
+            
+            <button type="submit" class="bg-green-500 hover:bg-green-600 transition p-3 rounded-lg text-white font-bold shadow-lg transform hover:scale-110 w-full">🚀 Register</button>
+        </form>
+    </div>
+</body>
+</html>

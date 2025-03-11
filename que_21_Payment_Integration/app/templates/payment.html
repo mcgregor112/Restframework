@@ -1,0 +1,59 @@
+<script src="https://js.stripe.com/v3/"></script>
+<form id="payment-form">
+    <div>
+        <label for="card-element">
+            Credit or Debit card
+        </label>
+        <div id="card-element">
+            <!-- A Stripe Element will be inserted here. -->
+        </div>
+
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+    </div>
+
+    <button id="submit">Submit Payment</button>
+</form>
+
+<script type="text/javascript">
+    var stripe = Stripe('{{ STRIPE_PUBLISHABLE_KEY }}');
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    var form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        stripe.createPaymentMethod({
+            type: 'card',
+            card: card,
+        }).then(function(result) {
+            if (result.error) {
+                // Show error in payment form
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                // Confirm the PaymentIntent with the payment method
+                fetch('/confirm_payment/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        payment_intent_id: result.paymentIntent.id,
+                    }),
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(responseJson) {
+                    if (responseJson.status === 'success') {
+                        alert('Payment Successful! Appointment Booked.');
+                    } else {
+                        alert('Payment failed. Please try again.');
+                    }
+                });
+            }
+        });
+    });
+</script>

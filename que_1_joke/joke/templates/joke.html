@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke</title>
+</head>
+<body>
+    <h1>Random Joke</h1>
+    {% if joke %}
+        <p><strong>Setup:</strong> {{ joke.setup }}</p>
+        <p><strong>Punchline:</strong> {{ joke.punchline }}</p>
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>

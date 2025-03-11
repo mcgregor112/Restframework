@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Tweets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+    <div class="max-w-4xl mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-6">Latest Tweets from @{{ username }}</h1>
+        {% if tweets %}
+            <ul>
+                {% for tweet in tweets %}
+                    <li class="mb-4 p-4 bg-white shadow-lg rounded-lg">
+                        <p class="text-gray-700">{{ tweet.full_text }}</p>
+                        <p class="text-sm text-gray-500 mt-2">Posted on: {{ tweet.created_at }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No tweets available or there was an issue fetching them.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profiles</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 py-10">
+
+    <!-- Main container -->
+    <div class="container mx-auto px-6 py-8 bg-white shadow-lg rounded-lg">
+        <h1 class="text-3xl font-semibold mb-6 text-center text-blue-600">Doctor Profiles</h1>
+
+        <!-- Table Structure -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto border-collapse border border-gray-300 text-left">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="py-3 px-4 border-b text-lg font-medium">Name</th>
+                        <th class="py-3 px-4 border-b text-lg font-medium">Specialty</th>
+                        <th class="py-3 px-4 border-b text-lg font-medium">Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                        <tr class="hover:bg-gray-100">
+                            <td class="py-3 px-4 border-b">{{ doctor.name }}</td>
+                            <td class="py-3 px-4 border-b">{{ doctor.speciality }}</td>
+                            <td class="py-3 px-4 border-b">{{ doctor.contact }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+

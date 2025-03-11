@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .neon-text {
+            text-shadow: 0 0 5px #ffffff, 0 0 10px #ff00ff, 0 0 15px #ff00ff;
+        }
+        .glow-border {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .dark-card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans min-h-screen flex items-center justify-center">
+    <div class="max-w-2xl w-full dark-card p-8 rounded-lg shadow-2xl">
+        <h1 class="text-4xl font-extrabold text-center mb-6 neon-text">🌍 Country Explorer</h1>
+
+        <form method="POST" class="mb-6 flex flex-col items-center gap-4">
+            {% csrf_token %}
+            <input type="text" name="country_name" placeholder="Enter country name" required
+                   class="p-3 w-full max-w-md glow-border border border-white rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-4 focus:ring-purple-500">
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 transition text-white p-3 rounded-lg w-full max-w-md font-bold shadow-lg transform hover:scale-105">🔍 Search</button>
+        </form>
+
+        {% if error_message %}
+            <p class="text-red-400 text-center font-semibold animate-pulse">⚠️ {{ error_message }}</p>
+        {% elif country_info %}
+            <div class="dark-card p-6 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-purple-400">{{ country_info.name }}</h2>
+                <p class="mt-2"><strong>🌍 Population:</strong> {{ country_info.population }}</p>
+                <p class="mt-1"><strong>🗣 Languages:</strong> {{ country_info.languages }}</p>
+                <p class="mt-1"><strong>💰 Currency:</strong> {{ country_info.currency }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
